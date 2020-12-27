@@ -16,14 +16,12 @@ public class HbmRun {
             SessionFactory sf = new MetadataSources(registry)
                     .buildMetadata()
                     .buildSessionFactory();
-            Session session = sf.openSession();
-            session.beginTransaction();
-
-            Car car = Car.of("Toyota", new Timestamp(System.currentTimeMillis()), "Sidorov Ivan");
-            session.save(car);
-
-            session.getTransaction().commit();
-            session.close();
+            try (Session session = sf.openSession()) {
+                session.beginTransaction();
+                Car car = Car.of("Toyota", new Timestamp(System.currentTimeMillis()), "Sidorov Ivan");
+                session.save(car);
+                session.getTransaction().commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
