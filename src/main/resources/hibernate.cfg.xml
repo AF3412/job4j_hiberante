@@ -18,5 +18,7 @@
 
         <mapping class="ru.af3412.Item" />
         <mapping class="ru.af3412.Car" />
+        <mapping class="ru.af3412.CarProducer" />
+        <mapping class="ru.af3412.CarModel" />
     </session-factory>
 </hibernate-configuration>
