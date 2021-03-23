@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import javax.persistence.Query;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class HibernateRun {
             for (Item it : list) {
                 System.out.println(it);
             }
+            Item fbn = findByName("Hibernate 2", sf);
+            System.out.println(fbn);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -81,6 +84,17 @@ public class HibernateRun {
             session.getTransaction().commit();
             return result;
         }
+    }
 
+    public static Item findByName(String name, SessionFactory sf) {
+        try (Session session = sf.openSession()) {
+            session.beginTransaction();
+            Query query = session.createQuery("from Item where name = :name");
+            query.setParameter("name", name);
+            System.out.println(query.getFirstResult());
+            Item result = (Item) query.getResultList().get(0);
+            session.getTransaction().commit();
+            return result;
+        }
     }
 }
