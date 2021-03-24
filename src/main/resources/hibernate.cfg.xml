@@ -20,5 +20,7 @@
         <mapping class="ru.af3412.Car" />
         <mapping class="ru.af3412.CarProducer" />
         <mapping class="ru.af3412.CarModel" />
+        <mapping class="ru.af3412.manytomany.Author" />
+        <mapping class="ru.af3412.manytomany.Book" />
     </session-factory>
 </hibernate-configuration>
