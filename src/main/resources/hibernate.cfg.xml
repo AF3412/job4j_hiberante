@@ -22,5 +22,8 @@
         <mapping class="ru.af3412.CarModel" />
         <mapping class="ru.af3412.manytomany.Author" />
         <mapping class="ru.af3412.manytomany.Book" />
+        <mapping class="ru.af3412.lazyInitialization.Task" />
+        <mapping class="ru.af3412.lazyInitialization.Category" />
+
     </session-factory>
 </hibernate-configuration>
