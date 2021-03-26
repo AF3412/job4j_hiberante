@@ -13,7 +13,7 @@ public class BoatProducer {
     private int id;
     private String name;
     @OneToMany(mappedBy = "boatProducer")
-    List<Boat> boats = new ArrayList<>();
+    private List<Boat> boats = new ArrayList<>();
 
     public static BoatProducer of(String name) {
         BoatProducer producer = new BoatProducer();
