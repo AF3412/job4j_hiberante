@@ -26,6 +26,7 @@
         <mapping class="ru.af3412.lazyInitialization.Category" />
         <mapping class="ru.af3412.lazyInitialization.Boat" />
         <mapping class="ru.af3412.lazyInitialization.BoatProducer" />
+        <mapping class="ru.af3412.hql.Candidate" />
 
     </session-factory>
 </hibernate-configuration>
