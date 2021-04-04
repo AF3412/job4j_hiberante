@@ -12,14 +12,17 @@ public class Candidate {
     private String name;
     private int experience;
     private float salary;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private BaseVacanies baseVacanies;
 
     public Candidate() {
     }
 
-    public Candidate(String name, int experience, float salary) {
+    public Candidate(String name, int experience, float salary, BaseVacanies baseVacanies) {
         this.name = name;
         this.experience = experience;
         this.salary = salary;
+        this.baseVacanies = baseVacanies;
     }
 
     public long getId() {
@@ -54,6 +57,14 @@ public class Candidate {
         this.salary = salary;
     }
 
+    public BaseVacanies getBaseVacanies() {
+        return baseVacanies;
+    }
+
+    public void setBaseVacanies(BaseVacanies baseVacanies) {
+        this.baseVacanies = baseVacanies;
+    }
+
     @Override
     public String toString() {
         return "Candidate{" +
@@ -61,6 +72,7 @@ public class Candidate {
                 ", name='" + name + '\'' +
                 ", experience=" + experience +
                 ", salary=" + salary +
+                ", baseVacanies=" + baseVacanies +
                 '}';
     }
 }

@@ -27,6 +27,8 @@
         <mapping class="ru.af3412.lazyInitialization.Boat" />
         <mapping class="ru.af3412.lazyInitialization.BoatProducer" />
         <mapping class="ru.af3412.hql.Candidate" />
+        <mapping class="ru.af3412.hql.Vacancy" />
+        <mapping class="ru.af3412.hql.BaseVacanies" />
 
     </session-factory>
 </hibernate-configuration>

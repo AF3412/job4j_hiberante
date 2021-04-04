@@ -12,34 +12,46 @@ public class HqlMain {
 
     public static void main(String[] args) {
 
+        Candidate candidate = null;
+
         try (final StandardServiceRegistry registry =
                      new StandardServiceRegistryBuilder().configure().build();
              final SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
              final Session session = sf.openSession()
         ) {
-            createCandidate(session);
+            /*createCandidate(session);
             viewAllCandidate(session);
             viewCandidateById(session, 1);
             viewCandidateByName(session, "Second");
             updateCandidateById(session, 1, "new name");
             viewCandidateById(session, 1);
             deleteCandidateById(session, 3);
-            viewCandidateById(session, 3);
+            viewCandidateById(session, 3);*/
+
+            /*createData(session);*/
+
+            candidate = viewCandidateBaseVacancy(session);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(candidate);
     }
 
-    private static void createCandidate(Session session) {
+    private static void createData(Session session) {
         session.beginTransaction();
+        BaseVacanies baseVacanies = new BaseVacanies();
+        Vacancy vacancy1 = new Vacancy("vacancy 1");
+        Vacancy vacancy2 = new Vacancy("vacancy 2");
+        Vacancy vacancy3 = new Vacancy("vacancy 3");
+        baseVacanies.addVacancy(vacancy1);
+        baseVacanies.addVacancy(vacancy2);
+        baseVacanies.addVacancy(vacancy3);
 
-        Candidate candidate1 = new Candidate("First", 1, 34.4f);
-        Candidate candidate2 = new Candidate("Second", 5, 99.9f);
-        Candidate candidate3 = new Candidate("Third", 9, 200f);
-
+        Candidate candidate1 = new Candidate("Alex", 1, 34.4f, baseVacanies);
         session.save(candidate1);
-        session.save(candidate2);
-        session.save(candidate3);
+
         session.getTransaction().commit();
     }
 
@@ -86,6 +98,26 @@ public class HqlMain {
                 .setParameter("id", id);
         query.executeUpdate();
         session.getTransaction().commit();
+    }
+
+    private static void save(Session session, Object entity) {
+        session.beginTransaction();
+        session.save(entity);
+        session.getTransaction().commit();
+    }
+
+    private static Candidate viewCandidateBaseVacancy(Session session) {
+        System.out.println("=========== BASE VACANCY ===========");
+        session.beginTransaction();
+        Query query = session.createQuery(
+                "from Candidate c " +
+                        "join fetch c.baseVacanies bv " +
+                        "join fetch bv.vacancies where c.id = :id",
+                Candidate.class)
+                .setParameter("id", 5L);
+        Candidate candidate = (Candidate) query.getSingleResult();
+        session.getTransaction().commit();
+        return candidate;
     }
 
 }
