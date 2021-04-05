@@ -1,10 +1,11 @@
-package ru.af3412;
+package ru.af3412.tracker;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import ru.af3412.tracker.Item;
 
 import javax.persistence.Query;
 import java.sql.Timestamp;

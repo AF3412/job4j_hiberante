@@ -1,4 +1,4 @@
-package ru.af3412;
+package ru.af3412.tracker;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

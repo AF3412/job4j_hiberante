@@ -1,4 +1,6 @@
-package ru.af3412;
+package ru.af3412.tracker;
+
+import ru.af3412.tracker.Item;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ru.af3412;
+package ru.af3412.cars;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

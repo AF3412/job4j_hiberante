@@ -16,10 +16,10 @@
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
 
-        <mapping class="ru.af3412.Item" />
-        <mapping class="ru.af3412.Car" />
-        <mapping class="ru.af3412.CarProducer" />
-        <mapping class="ru.af3412.CarModel" />
+        <mapping class="ru.af3412.tracker.Item" />
+        <mapping class="ru.af3412.cars.Car" />
+        <mapping class="ru.af3412.cars.CarProducer" />
+        <mapping class="ru.af3412.cars.CarModel" />
         <mapping class="ru.af3412.manytomany.Author" />
         <mapping class="ru.af3412.manytomany.Book" />
         <mapping class="ru.af3412.lazyInitialization.Task" />
