@@ -5,11 +5,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.query.Query;
 
 import java.util.List;
 
 public class HbmTracker implements Store, AutoCloseable {
+
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
     private final SessionFactory sf = new MetadataSources(registry)
@@ -39,8 +39,7 @@ public class HbmTracker implements Store, AutoCloseable {
     public boolean delete(int id) {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            Item item = new Item(null);
-            item.setId(id);
+            Item item = new Item(id, "");
             session.delete(item);
             session.getTransaction().commit();
         }
@@ -51,19 +50,20 @@ public class HbmTracker implements Store, AutoCloseable {
     public List<Item> findAll() {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            List result = session.createQuery("from ru.af3412.Item").list();
+            List result = session.createQuery("from ru.af3412.tracker.Item").list();
             session.getTransaction().commit();
             return result;
         }
     }
 
     @Override
-    public List<Item> findByName(String key) {
+    public List<Item> findByName(String name) {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            Query query = session.createQuery("from ru.af3412.Item where name = :name");
-            query.setParameter("name", key);
-            List result = session.createQuery("from ru.af3412.Item where name = :key").list();
+            var query = session
+                    .createQuery("from ru.af3412.tracker.Item where name = :name")
+                    .setParameter("name", name);
+            var result = query.getResultList();
             session.getTransaction().commit();
             return result;
         }
@@ -81,7 +81,7 @@ public class HbmTracker implements Store, AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         StandardServiceRegistryBuilder.destroy(registry);
     }
 }

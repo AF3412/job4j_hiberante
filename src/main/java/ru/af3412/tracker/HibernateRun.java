@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.af3412.tracker.Item;
 
 import javax.persistence.Query;
 import java.sql.Timestamp;
@@ -72,7 +71,7 @@ public class HibernateRun {
     public static List<Item> findAll(SessionFactory sf) {
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-            List result = session.createQuery("from ru.af3412.Item").list();
+            List result = session.createQuery("from ru.af3412.tracker.Item").list();
             session.getTransaction().commit();
             return result;
         }
